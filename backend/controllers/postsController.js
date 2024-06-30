@@ -6,21 +6,35 @@ const getPost = async () => {
     const { rows } = await pool.query(query);
     return rows;
   } catch (error) {
-    throw new Error(`Error al obtener el posts: ${error.message}`);
+    console.error(`Error al obtener los posts: ${error.message}`);
+    throw new Error(`Error al obtener los posts: ${error.message}`);
   }
 };
 
 const createPost = async ({ titulo, url, descripcion, likes = 0 }) => {
   try {
-    const query =
-      "INSERT INTO posts (titulo,img,descripcion,likes) VALUES ($1,$2,$3,$4) RETURNING *";
+    const query = "INSERT INTO posts (titulo, img, descripcion, likes) VALUES ($1, $2, $3, $4) RETURNING *";
     const values = [titulo, url, descripcion, likes];
     const { rows } = await pool.query(query, values);
     return rows;
   } catch (error) {
-    console.log(error)
-    throw new Error(`Error al guarda el posts: ${error.message}`);
+    console.error(`Error al guardar el post: ${error.message}`);
+    throw new Error(`Error al guardar el post: ${error.message}`);
   }
 };
 
-module.exports = { getPost, createPost };
+/*
+const deletePost = async (postId) => {
+  try {
+    const query = "DELETE FROM posts WHERE id = $1 RETURNING *";
+    const values = [postId];
+    const { rows } = await pool.query(query, values);
+    return rows;
+  } catch (error) {
+    console.error(`Error al eliminar el post: ${error.message}`);
+    throw new Error(`Error al eliminar el post: ${error.message}`);
+  }
+};
+*/
+module.exports = { getPost, createPost/*, deletePost*/ };
+

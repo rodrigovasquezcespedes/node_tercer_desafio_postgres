@@ -28,4 +28,27 @@ app.post("/posts", async (req, res) => {
   }
 });
 
+/*
+app.delete("/posts/:id", async (req, res) => {
+  const postId = req.params.id;
+  try {
+    const deletedPost = await deletePost(postId);
+    res.status(200).send(`Post con ID ${postId} eliminado correctamente`);
+  } catch (error) {
+    res.status(400).send(`Error al eliminar el post con ID ${postId}: ${error.message}`);
+  }
+});
+
+app.put("/posts/:id", async (req, res) => {
+  const postId = req.params.id;
+  const { titulo, url, descripcion, likes } = req.body;
+  try {
+    await updatePost(postId, { titulo, url, descripcion, likes });
+    res.status(200).send(`Post con ID ${postId} actualizado correctamente`);
+  } catch (error) {
+    res.status(400).send(`Error al actualizar el post con ID ${postId}: ${error.message}`);
+  }
+});
+
+*/
 app.listen(port, () => console.log(`Escuchando en el puerto ${port}`));
